@@ -17,20 +17,16 @@ export default function App() {
         },
     ]);
 
-    const addThought = (thought) => {
+    function addThought(thought) {
         setThoughts((prevThoughts) => {
             return [
-                {
-                    id: generateId(),
-                    text: thought,
-                    expiresAt: getNewExpirationTime(),
-                },
+                thought,
                 ...prevThoughts
             ]
         })
     }
 
-    const removeThought = (id) => {
+    function removeThought(id) {
         setThoughts((prevThoughts) => {
             return prevThoughts.filter((thought) => thought.id !== id);
         })

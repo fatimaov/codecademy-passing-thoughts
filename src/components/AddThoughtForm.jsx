@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { generateId, getNewExpirationTime } from '../utils/utils';
+import { generateId, getNewExpirationTime } from '../utils/utils';
 
 export function AddThoughtForm({ addThought }) {
     const [text, setText] = useState('');
@@ -13,7 +13,12 @@ export function AddThoughtForm({ addThought }) {
         if (!text) {
             return;
         }
-        addThought(text);
+        const newThought = {
+            id: generateId(),   
+            text: text,
+            expiresAt: getNewExpirationTime(),
+        }
+        addThought(newThought);
         setText('')
     }
 
