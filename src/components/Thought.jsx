@@ -1,18 +1,20 @@
 
 import { useEffect } from "react";
+import Countdown from "./Countdown";
 
 export function Thought(props) {
     const { thought, removeThought } = props;
+
+    const timeRemaining = Math.ceil((thought.expiresAt - Date.now())/1000)*1000;
 
     const handleRemoveClick = () => {
         removeThought(thought.id);
     };
 
     useEffect(() => {
-        const timeRemainig = thought.expiresAt - Date.now();
         const timeout = setTimeout(() => {
             removeThought(thought.id);
-        }, timeRemainig)
+        }, timeRemaining)
 
         return () => clearTimeout(timeout);
     })
@@ -26,7 +28,9 @@ export function Thought(props) {
             >
                 &times;
             </button>
+            <div>{thought.id}</div>
             <div className="text">{thought.text}</div>
+            <Countdown className="text" timeRemaining={timeRemaining} />
         </li>
     );
 }
