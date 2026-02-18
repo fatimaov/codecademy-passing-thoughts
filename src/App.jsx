@@ -15,7 +15,7 @@ export default function App() {
             text: "They'll be removed after 15 seconds.",
             expiresAt: getNewExpirationTime(),
         },
-    ]);
+    ].reverse());
 
     function addThought(thought) {
         setThoughts((prevThoughts) => {
