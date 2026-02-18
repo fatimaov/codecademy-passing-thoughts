@@ -4,7 +4,7 @@ import { Thought } from './components/Thought';
 import { generateId, getNewExpirationTime } from './utils/utils';
 
 export default function App() {
-    const [thoughts, setThoughts] = useState([
+    const [thoughts, setThoughts] = useState(() => [
         {
             id: generateId(),
             text: 'This is a place for your passing thoughts.',
