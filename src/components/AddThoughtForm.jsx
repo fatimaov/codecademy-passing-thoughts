@@ -1,14 +1,32 @@
-import { generateId, getNewExpirationTime } from '../utils/utils';
+import { useState } from "react";
+// import { generateId, getNewExpirationTime } from '../utils/utils';
 
-export function AddThoughtForm(props) {
-  return (
-    <form className="AddThoughtForm">
-      <input
-        type="text"
-        aria-label="What's on your mind?"
-        placeholder="What's on your mind?"
-      />
-      <input type="submit" value="Add" />
-    </form>
-  );
+export function AddThoughtForm({ addThought }) {
+    const [text, setText] = useState('');
+
+    const handleChange = (event) => {
+        return setText(event.target.value)
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (!text) {
+            return;
+        }
+        addThought(text);
+        setText('')
+    }
+
+    return (
+        <form className="AddThoughtForm" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                aria-label="What's on your mind?"
+                placeholder="What's on your mind?"
+                value={text}
+                onChange={handleChange}
+            />
+            <input type="submit" value="Add" />
+        </form>
+    );
 }
