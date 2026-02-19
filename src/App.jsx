@@ -33,13 +33,13 @@ export default function App() {
     }
 
     return (
-        <div className="App">
-            <header>
-                <h1>Passing Thoughts</h1>
+        <div className="container">
+            <header className=" my-5">
+                <h1 className="text-center display-3">Passing Thoughts 💭</h1>
             </header>
             <main>
                 <AddThoughtForm addThought={addThought} />
-                <ul className="thoughts">
+                <ul className='list-group'>
                     {thoughts.map((thought) => (
                         <Thought key={thought.id} thought={thought} removeThought={removeThought} />
                     ))}

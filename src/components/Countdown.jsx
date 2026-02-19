@@ -22,7 +22,7 @@ function Countdown({ thought, removeThought }) {
     })
 
     return (
-        <div style={{ color: `rgb(${redValue}, 0, 0)` }}>Dissapearing in {countdown} seconds...</div>
+        <div style={{ color: `rgb(${redValue}, 0, 0)` }} className='fst-italic mt-4'>Dissapearing in {countdown} seconds...</div>
     )
 }
 

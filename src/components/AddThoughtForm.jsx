@@ -14,7 +14,7 @@ function AddThoughtForm({ addThought }) {
             return;
         }
         const newThought = {
-            id: generateId(),   
+            id: generateId(),
             text: text,
             expiresAt: getNewExpirationTime(),
         }
@@ -23,15 +23,16 @@ function AddThoughtForm({ addThought }) {
     }
 
     return (
-        <form className="AddThoughtForm" onSubmit={handleSubmit}>
+        <form className="input-group my-5 mx-auto" onSubmit={handleSubmit} style={{maxWidth: "500px"}}>
             <input
                 type="text"
                 aria-label="What's on your mind?"
                 placeholder="What's on your mind?"
                 value={text}
                 onChange={handleChange}
+                className="form-control"
             />
-            <input type="submit" value="Add" />
+            <input type="submit" value="Add" className="btn btn-primary" />
         </form>
     );
 }
