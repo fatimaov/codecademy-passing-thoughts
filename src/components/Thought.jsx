@@ -9,7 +9,7 @@ function Thought({ thought, removeThought }) {
         <li className="list-group-item d-flex justify-content-between pb-5 mt-3 border-0 border-bottom rounded-2">
             <div className="d-flex flex-column">
                 <div>
-                    <div className="badge text-bg-primary rounded-pill mb-3">{thought.id}</div>
+                    <div className="badge text-bg-primary rounded-pill mb-3">{thought.id + 1}</div>
                 </div>
                 <div className="h3">{thought.text}</div>
                 <Countdown thought={thought} removeThought={removeThought} />
