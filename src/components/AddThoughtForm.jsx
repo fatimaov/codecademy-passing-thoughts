@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { generateId, getNewExpirationTime } from '../utils/utils';
 
-export function AddThoughtForm({ addThought }) {
+function AddThoughtForm({ addThought }) {
     const [text, setText] = useState('');
 
     const handleChange = (event) => {
@@ -35,3 +35,5 @@ export function AddThoughtForm({ addThought }) {
         </form>
     );
 }
+
+export default AddThoughtForm;

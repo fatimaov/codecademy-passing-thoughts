@@ -1,19 +1,28 @@
 import { useEffect, useState } from 'react';
 
-function Countdown({timeRemaining}) {
-    const [countdown, setCountdown] = useState(timeRemaining/1000)
+function Countdown({ thought, removeThought }) {
+    const [countdown, setCountdown] = useState(Math.ceil((thought.expiresAt - Date.now()) / 1000))
+    const [redValue, setRedValue] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCountdown((prevCountdown) => prevCountdown - 1)
+            setCountdown((prevCountdown) => {
+                if (prevCountdown === 4) {
+                    setRedValue(255);
+                }
+                if (prevCountdown === 1) {
+                    return removeThought(thought.id);
+                }
+                return prevCountdown - 1;
+            });
         }, 1000)
-
-        return () => clearInterval(interval)
+        return () => {
+            clearInterval(interval);
+        };
     })
-        
 
     return (
-        <div >This thought will dissapear in {countdown} seconds</div>
+        <div style={{ color: `rgb(${redValue}, 0, 0)` }}>Dissapearing in {countdown} seconds...</div>
     )
 }
 
