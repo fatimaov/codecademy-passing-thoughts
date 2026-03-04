@@ -1,27 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from "react";
 
 function Countdown({ thought, removeThought }) {
-    const [countdown, setCountdown] = useState(Math.ceil((thought.expiresAt - Date.now()) / 1000))
-    
-    const isWarning = countdown <= 3;
+  const [now, setNow] = useState(() => Date.now());
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCountdown((prevCountdown) => {
-                if (prevCountdown === 1) {
-                    return removeThought(thought.id);
-                }
-                return prevCountdown - 1;
-            });
-        }, 1000)
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 250); // smoother, still cheap
+    return () => clearInterval(id);
+  }, []);
 
-    return (
-        <div style={{ color: isWarning ? "rgb(255,0,0)" : "rgb(0,0,0)" }} className='fst-italic mt-4'>Dissapearing in {countdown} seconds...</div>
-    )
+  const countdown = useMemo(() => {
+    return Math.max(0, Math.ceil((thought.expiresAt - now) / 1000));
+  }, [thought.expiresAt, now]);
+
+  const isWarning = countdown <= 3;
+
+  useEffect(() => {
+    if (countdown === 0) removeThought(thought.id);
+  }, [countdown, removeThought, thought.id]);
+
+  return (
+    <div
+      style={{ color: isWarning ? "rgb(255,0,0)" : "rgb(0,0,0)" }}
+      className="fst-italic mt-4"
+    >
+      Dissapearing in {countdown} seconds...
+    </div>
+  );
 }
 
 export default Countdown;
